@@ -140,8 +140,6 @@ uv run auth0-pentest [OPTIONS]
 # With Python (after activating venv):
 python -m src.cli [OPTIONS]
 
-# Or if installed with pip:
-auth0-pentest [OPTIONS]
 ```
 
 ### Required Parameters
@@ -269,52 +267,6 @@ auth0-pentest \
   --connection-wordlist connections.txt
 ```
 
-## 🛠️ Development
-
-### Project Structure
-
-```
-auth0-explorer/
-├── src/
-│   ├── __init__.py           # Package initialization
-│   ├── cli.py                # Command-line interface
-│   ├── config.py             # Configuration models
-│   ├── scanner.py            # Main scanner orchestration
-│   ├── http_client.py        # HTTP client wrapper
-│   ├── report.py             # Report generation
-│   └── checks/               # Security check modules
-│       ├── phase1_recon.py
-│       ├── phase2_discovery.py
-│       ├── phase3_testing.py
-│       └── phase4_attacks.py
-├── docs/                     # Additional documentation
-├── pyproject.toml            # Project dependencies
-├── README.md                 # This file
-└── LICENSE                   # License information
-```
-
-### Running Tests
-
-```bash
-# With uv:
-uv pip install pytest pytest-asyncio
-uv run pytest
-
-# With standard Python:
-pip install pytest pytest-asyncio
-pytest
-```
-
-### Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## ⚖️ Legal Disclaimer
 
 **FOR AUTHORIZED SECURITY RESEARCH AND PENETRATION TESTING ONLY**
@@ -351,18 +303,9 @@ By using this tool, you agree to:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- Auth0 Security Team for their comprehensive documentation
-- The security research community
-- E.V.A Security team
-- All contributors and testers
-
 ## 👤 Author
 
 **Bar Hajby**
-- Organization: [E.V.A Security](https://github.com/EVA-Information-Security-Consluting)
-- GitHub: [@EVA-Information-Security-Consluting](https://github.com/EVA-Information-Security-Consluting)
 
 ## 📞 Contact
 
