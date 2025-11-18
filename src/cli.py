@@ -81,7 +81,7 @@ console = Console()
     "--phases",
     help=(
         "Comma-separated phases to run (default: all). "
-        "1=Recon (OpenID/CORS/redirect), 2=Connections, 3=Per-Connection (enum/policy/signup)"
+        "1=Recon (OpenID/redirect), 2=Connections, 3=Per-Connection (enum/policy/signup)"
     ),
 )
 def main(

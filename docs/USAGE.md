@@ -101,10 +101,9 @@ Examples:
 
 ```bash
 --phases TEXT    Comma-separated phases:
-                 1 = Recon (OpenID/CORS)
+                 1 = Recon (OpenID/redirect)
                  2 = Connections
                  3 = Per-Connection (enum/policy/signup)
-                 4 = App Attacks (redirect)
 ```
 
 ## Testing Phases
@@ -113,7 +112,7 @@ Examples:
 
 **What it does:**
 - Discovers OpenID configuration
-- Tests for CORS misconfigurations
+- Tests for open redirect vulnerabilities
 
 **When to use:**
 - Initial information gathering

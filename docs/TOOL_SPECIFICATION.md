@@ -10,12 +10,11 @@
 | # | Check | Phase | Severity | Description |
 |---|-------|-------|----------|-------------|
 | 1 | OpenID Configuration | 1.1 | INFO | Discovers supported grant types and algorithms |
-| 2 | CORS Misconfiguration | 1.2 | HIGH | Checks if Auth0 allows cross-origin requests |
-| 3 | Open Redirect | 1.3 | HIGH | Tests redirect URI validation |
-| 4 | Connection Enumeration | 2.1 | MEDIUM | Discovers available authentication methods |
-| 5 | Username Enumeration - Signup | 3.1 | MEDIUM | Identifies valid user accounts via signup endpoint |
-| 6 | Password Policy Discovery | 3.2 | INFO | Determines password complexity requirements |
-| 7 | Public Signup Misconfiguration | 3.3 | HIGH | Tests if unintended public registration is possible |
+| 2 | Open Redirect | 1.2 | HIGH | Tests redirect URI validation |
+| 3 | Connection Enumeration | 2.1 | MEDIUM | Discovers available authentication methods |
+| 4 | Username Enumeration - Signup | 3.1 | MEDIUM | Identifies valid user accounts via signup endpoint |
+| 5 | Password Policy Discovery | 3.2 | INFO | Determines password complexity requirements |
+| 6 | Public Signup Misconfiguration | 3.3 | HIGH | Tests if unintended public registration is possible |
 
 ---
 
@@ -86,42 +85,7 @@ GET https://victim.auth0.com/.well-known/openid-configuration
 
 ---
 
-### Check 1.2: CORS Misconfiguration
-
-**Purpose:** Test if cross-origin requests are allowed
-
-**Request:**
-```http
-OPTIONS https://victim.auth0.com/oauth/token
-Origin: https://attacker.com
-Access-Control-Request-Method: POST
-Access-Control-Request-Headers: Content-Type
-```
-
-**Example Response (VULNERABLE):**
-```http
-HTTP/2 200
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-```
-
-**What to Check:**
-- ✓ `Access-Control-Allow-Origin: *` → CRITICAL (allows any origin)
-- ✓ `Access-Control-Allow-Origin: {attacker_origin}` → CRITICAL (reflects attacker origin)
-- ✓ Wildcard + credentials → CRITICAL (session theft possible)
-
-**Output:**
-```json
-{
-  "cors_misconfigured": true,
-  "allows_credentials": true,
-  "risk": "CRITICAL: Can enumerate/attack from any website"
-}
-```
-
----
-
-### Check 1.3: Open Redirect
+### Check 1.2: Open Redirect
 
 **Purpose:** Test redirect URI validation
 

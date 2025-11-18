@@ -172,8 +172,7 @@ auth0-pentest [OPTIONS]
 
 ### Phase 1: Reconnaissance
 - **1.1 OpenID Configuration Discovery** - Discovers supported grant types and algorithms
-- **1.2 CORS Misconfiguration** - Checks if Auth0 allows cross-origin requests
-- **1.3 Open Redirect** - Tests redirect URI validation
+- **1.2 Open Redirect** - Tests redirect URI validation
 
 ### Phase 2: Connection Discovery
 - **2.1 Connection Enumeration** - Discovers available authentication methods

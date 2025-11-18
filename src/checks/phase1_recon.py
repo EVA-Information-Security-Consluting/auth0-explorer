@@ -94,96 +94,16 @@ async def check_openid_configuration(client: Auth0HttpClient) -> CheckResult:
         )
 
 
-async def check_cors_misconfiguration(client: Auth0HttpClient) -> CheckResult:
-    """
-    Check 1.2: CORS Misconfiguration
-    
-    Tests if Auth0 endpoints allow cross-origin requests from arbitrary origins.
-    """
-    console.print("\n[bold cyan]Check 1.2:[/bold cyan] CORS Misconfiguration")
-    
-    try:
-        # Test OPTIONS request to token endpoint
-        headers = {
-            "Origin": "https://attacker.com",
-            "Access-Control-Request-Method": "POST",
-            "Access-Control-Request-Headers": "Content-Type",
-        }
-        
-        response = await client.options("/oauth/token", headers=headers)
-        
-        # Check CORS headers
-        cors_headers = {
-            "Access-Control-Allow-Origin": response.headers.get("Access-Control-Allow-Origin"),
-            "Access-Control-Allow-Credentials": response.headers.get("Access-Control-Allow-Credentials"),
-            "Access-Control-Allow-Methods": response.headers.get("Access-Control-Allow-Methods"),
-            "Access-Control-Allow-Headers": response.headers.get("Access-Control-Allow-Headers"),
-        }
-        
-        allow_origin = cors_headers["Access-Control-Allow-Origin"]
-        allow_credentials = cors_headers["Access-Control-Allow-Credentials"]
-        
-        # Determine vulnerability
-        vulnerable = False
-        risk_description = None
-        
-        if allow_origin == "*":
-            vulnerable = True
-            risk_description = "CRITICAL: Allows any origin (*)"
-            console.print("  [red]🔴 CRITICAL: Access-Control-Allow-Origin: *[/red]")
-        elif allow_origin == "https://attacker.com":
-            vulnerable = True
-            risk_description = "CRITICAL: Reflects attacker origin"
-            console.print("  [red]🔴 CRITICAL: Reflects attacker origin[/red]")
-        
-        if allow_origin and allow_credentials == "true":
-            if not vulnerable:
-                vulnerable = True
-            risk_description = (risk_description or "") + " + credentials allowed (session theft possible)"
-            console.print("  [red]🔴 Access-Control-Allow-Credentials: true[/red]")
-        
-        if not vulnerable:
-            console.print("  [green]✓ CORS properly configured[/green]")
-        
-        details = {
-            "cors_headers": cors_headers,
-            "allows_wildcard_origin": allow_origin == "*",
-            "reflects_attacker_origin": allow_origin == "https://attacker.com",
-            "allows_credentials": allow_credentials == "true",
-        }
-        
-        return CheckResult(
-            check_id="1.2",
-            check_name="CORS Misconfiguration",
-            phase="Phase 1: Reconnaissance",
-            severity="HIGH" if vulnerable else "INFO",
-            vulnerable=vulnerable,
-            details=details,
-            risk_description=risk_description,
-        )
-    
-    except Exception as e:
-        console.print(f"  [red]Error:[/red] {e}")
-        return CheckResult(
-            check_id="1.2",
-            check_name="CORS Misconfiguration",
-            phase="Phase 1: Reconnaissance",
-            severity="HIGH",
-            vulnerable=False,
-            details={"error": str(e)},
-        )
-
-
 async def check_open_redirect(
     client: Auth0HttpClient,
     config: ScanConfig
 ) -> CheckResult:
     """
-    Check 1.3: Open Redirect
+    Check 1.2: Open Redirect
     
     Tests redirect URI validation for open redirect vulnerabilities.
     """
-    console.print("\n[bold cyan]Check 1.3:[/bold cyan] Open Redirect")
+    console.print("\n[bold cyan]Check 1.2:[/bold cyan] Open Redirect")
     
     test_redirects = [
         "https://attacker.com",
@@ -244,7 +164,7 @@ async def check_open_redirect(
         console.print(f"\n  [green]✓ Redirect validation is strict[/green]")
     
     return CheckResult(
-        check_id="1.3",
+        check_id="1.2",
         check_name="Open Redirect",
         phase="Phase 1: Reconnaissance",
         severity="HIGH" if vulnerable else "INFO",
@@ -267,11 +187,7 @@ async def run_phase1_checks(client: Auth0HttpClient, config: ScanConfig) -> list
     result = await check_openid_configuration(client)
     results.append(result)
     
-    # Check 1.2: CORS Misconfiguration
-    result = await check_cors_misconfiguration(client)
-    results.append(result)
-    
-    # Check 1.3: Open Redirect
+    # Check 1.2: Open Redirect
     result = await check_open_redirect(client, config)
     results.append(result)
     
