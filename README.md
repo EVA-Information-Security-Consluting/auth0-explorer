@@ -10,7 +10,6 @@
 Auth0 Explorer is a black-box security assessment tool designed to discover misconfigurations and security issues in Auth0 implementations. It performs automated reconnaissance and testing across multiple attack surfaces.
 
 **Author:** Bar Hajby  
-**Organization:** [E.V.A Security](https://github.com/EVA-Information-Security-Consluting)
 
 ## 🎯 Features
 
