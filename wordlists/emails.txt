@@ -1,0 +1,22 @@
+# Sample email wordlist for username enumeration
+# Replace with target-specific emails
+
+# Common administrative accounts
+admin@victim.com
+administrator@victim.com
+support@victim.com
+info@victim.com
+contact@victim.com
+help@victim.com
+
+# Common developer accounts
+dev@victim.com
+developer@victim.com
+test@victim.com
+staging@victim.com
+
+# Common user accounts
+user@victim.com
+demo@victim.com
+guest@victim.com
+

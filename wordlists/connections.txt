@@ -1,0 +1,32 @@
+# Default Auth0 Connection Names
+# Database Connections
+Username-Password-Authentication
+email
+sms
+Database-Connection
+Legacy-Database
+Corporate-Database
+Production-DB
+Dev-Database
+Test-Database
+
+# Social Providers
+google-oauth2
+facebook
+github
+twitter
+linkedin
+windowslive
+apple
+amazon
+spotify
+yahoo
+
+# Enterprise
+Corporate-AD
+LDAP
+ADFS
+Azure-AD
+Okta
+PingFederate
+

@@ -47,11 +47,13 @@ htmlcov/
 .hypothesis/
 
 # Output
-output/
+output/*
+!output/.gitkeep
 results/
 *.log
 *.json
 *.txt
+!requirements.txt
 
 # Sensitive data
 auth_config.json
